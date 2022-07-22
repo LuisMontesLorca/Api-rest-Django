@@ -1,0 +1,37 @@
+{% extends 'base.html' %} 
+
+{% block titulo_principal %}
+
+<div id=titulo_pagina>
+    Lista de Carreras Registradas
+</div>
+{% endblock %} 
+
+{% block content %} {% if object_list %}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Semestres</th>
+            <th>Mensualidad</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for carrera in object_list %}
+        <tr>
+            <th scope="row">{{ carrera.nombre }} </th>
+            <td>{{ carrera.semestres }}</td>
+            <td>${{ carrera.mensualidad }}</td>
+
+            <td><a class="btn btn-primary" href="{% url 'edit_carrera' carrera.id %}">Editar</a></td>
+            <td><a class="btn btn-danger" href="{% url 'del_carrera' carrera.id %}">Eliminar</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+    <h1>No hay registros de carrera</h1>
+{% endif %} {% endblock %}
